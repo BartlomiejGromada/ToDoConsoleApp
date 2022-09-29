@@ -1,4 +1,5 @@
-﻿using ToDoConsoleApp.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoConsoleApp.Entities;
 
 namespace ToDoConsoleApp.Seed
 {

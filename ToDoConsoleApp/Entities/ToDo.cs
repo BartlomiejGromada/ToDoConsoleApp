@@ -1,4 +1,6 @@
-﻿namespace ToDoConsoleApp.Entities
+﻿using System.Text;
+
+namespace ToDoConsoleApp.Entities
 {
     public class ToDo
     {
@@ -10,14 +12,17 @@
         public int Priority { get; set; }
         public Status Status { get; set; }
         public int StatusId { get; set; }
-        public string Command { get; set; }
+        public string Comments { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public override string ToString()
         {
-            return $@"Id: {Id} - Name: {Name} - DateFrom: {DateFrom} - DateTo: {DateTo} -
-                        Priority: {Priority} - Status: {Status.Name} - Command: { Command} -
-                        CreatedAt: {CreatedAt}";
+            var sb = new StringBuilder($@"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(DateFrom)}: {DateFrom:yyyy-MM-dd} - {nameof(DateTo)}: {DateTo:yyyy-MM-dd} -
+                        {nameof(Priority)}: {Priority} - {nameof(Status)}: {Status.Name} - {nameof(Comments)}: { Comments} -
+                        {nameof(CreatedAt)}: {CreatedAt:yyyy-MM-dd}");
+            sb.Append("\nCategories: ");
+            Categories.ForEach(c => sb.Append($"{c.Name} "));
+            return sb.ToString();
         }
     }
 }

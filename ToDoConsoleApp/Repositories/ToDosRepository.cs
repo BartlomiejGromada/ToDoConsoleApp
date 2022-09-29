@@ -5,9 +5,19 @@ namespace ToDoConsoleApp.Repositories
 {
     public class ToDosRepository : IToDosRepository
     {
+        public int Count()
+        {
+            using var context = new ToDoDbContext();
+            return context.ToDos.Count();
+        }
         public void Add(ToDo toDo)
         {
             using var context = new ToDoDbContext();
+            foreach (var item in toDo.Categories)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+            }
+         
             context.ToDos.Add(toDo);
             context.SaveChanges();
         }

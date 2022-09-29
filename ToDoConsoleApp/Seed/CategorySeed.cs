@@ -7,7 +7,7 @@ namespace ToDoConsoleApp.Seed
         public static void SeedData()
         {
             using var context = new ToDoDbContext();
-            if(!context.Categories.ToList().Any())
+            if (!context.Categories.ToList().Any())
             {
                 context.Categories.AddRange(
                         new Category("Work"),

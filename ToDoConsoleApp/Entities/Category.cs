@@ -10,9 +10,21 @@
         public string Name { get; set; }
         public List<ToDo> ToDos { get; set; } = new List<ToDo>();
 
+        public override bool Equals(object obj)
+        {
+            return obj is Category category &&
+                   Id == category.Id &&
+                   Name == category.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Name);
+        }
+
         public override string ToString()
         {
-            return $"Id: {Id} - Name: {Name}";
+            return $"{nameof(Id)}: {Id} - {nameof(Name)}: {Name}";
         }
     }
 }

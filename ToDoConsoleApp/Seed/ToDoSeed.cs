@@ -22,7 +22,7 @@ namespace ToDoConsoleApp.Seed
                                Categories = { category },
                                Priority = 10,
                                StatusId = 1,
-                               Command = "Udemy course",
+                               Comments = "Udemy course",
                                CreatedAt = DateTime.Now,
                            }
                         );
