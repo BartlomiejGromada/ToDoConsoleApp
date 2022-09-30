@@ -17,11 +17,9 @@ namespace ToDoConsoleApp.Entities
 
         public override string ToString()
         {
-            var sb = new StringBuilder($@"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(DateFrom)}: {DateFrom:yyyy-MM-dd} - {nameof(DateTo)}: {DateTo:yyyy-MM-dd} -
-                        {nameof(Priority)}: {Priority} - {nameof(Status)}: {Status.Name} - {nameof(Comments)}: { Comments} -
-                        {nameof(CreatedAt)}: {CreatedAt:yyyy-MM-dd}");
-            sb.Append("\nCategories: ");
+            var sb = new StringBuilder($"{Id} | {Name} | {DateFrom:yyyy-MM-dd} | {DateTo:yyyy-MM-dd} |        {Priority}     |   {Status.Name} |      {Comments}          |     {CreatedAt:yyyy-MM-dd} |        ");
             Categories.ForEach(c => sb.Append($"{c.Name} "));
+
             return sb.ToString();
         }
     }

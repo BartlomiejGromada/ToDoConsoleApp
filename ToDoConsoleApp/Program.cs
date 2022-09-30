@@ -9,17 +9,20 @@ ToDoSeed.SeedData();
 var todosService = new ToDosService();
 var categoriesService = new CategoriesService();
 List<Category> categories = null;
+var statusesService = new StatusesService();
+List<Status> statuses = null;
 
 var running = true;
 while(running)
 {
-    Console.WriteLine("*************");
-    Console.WriteLine("P. Print All ToDos");
-    Console.WriteLine("A. Add todo");
-    Console.WriteLine("R. Remove todo");
-    Console.WriteLine("C. Clear console");
-    Console.WriteLine("Q. Exit");
-    Console.WriteLine("*************");
+    Console.WriteLine("*************************");
+    Console.WriteLine("* P. Print All ToDos    *");
+    Console.WriteLine("* A. Add todo           *");
+    Console.WriteLine("* S. Change todo status *");
+    Console.WriteLine("* R. Remove todo        *");
+    Console.WriteLine("* C. Clear console      *");
+    Console.WriteLine("* Q. Exit               *");
+    Console.WriteLine("*************************");
 
     var choice = Console.ReadKey();
     Console.WriteLine();
@@ -31,6 +34,10 @@ while(running)
         case ConsoleKey.A:
             categories ??= categoriesService.GetAll();
             todosService.Add(categories);
+            break;
+        case ConsoleKey.S:
+            statuses ??= statusesService.GetAll();
+            todosService.ChangeStatus(statuses);
             break;
         case ConsoleKey.R:
             todosService.Remove();

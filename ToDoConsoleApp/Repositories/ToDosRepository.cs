@@ -31,6 +31,24 @@ namespace ToDoConsoleApp.Repositories
                 .ToList();
         }
 
+        public ToDo GetById(int id)
+        {
+            using var context = new ToDoDbContext();
+            return context.ToDos
+                .Where(td => td.Id == id)
+                .FirstOrDefault();
+        }
+
+        public void ChangeStatus(int toDoId, int statusId)
+        {
+            using var context = new ToDoDbContext();
+            var toDo = context.ToDos
+                .Where(td => td.Id == toDoId)
+                .FirstOrDefault();
+            toDo.StatusId = statusId;
+            context.SaveChanges();
+        }
+
         public void Remove(int id)
         {
             using var context = new ToDoDbContext();

@@ -6,6 +6,7 @@ namespace ToDoConsoleApp.Services
     {
         void GetAll();
         void Add(List<Category> categories);
+        void ChangeStatus(List<Status> statuses);
         void Remove();
     }
 }

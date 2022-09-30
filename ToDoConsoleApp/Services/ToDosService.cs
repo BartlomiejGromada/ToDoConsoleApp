@@ -1,5 +1,6 @@
 ﻿using ToDoConsoleApp.Entities;
 using ToDoConsoleApp.Repositories;
+using ToDoConsoleApp.Utils;
 
 namespace ToDoConsoleApp.Services
 {
@@ -70,26 +71,58 @@ namespace ToDoConsoleApp.Services
                 CreatedAt = DateTime.Now,
             });
 
-            Console.WriteLine("Todo has been added successful!");
+            CustomConsole.Success("Todo has been added successful!");
         }
 
         public void GetAll()
         {
-           var todos = _todosRepository.GetAll();
-           todos.ForEach(todo => Console.WriteLine(todo));
+            var todos = _todosRepository.GetAll();
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Id      Name             DateFrom         DateTo       Priority       Status                  Comments                CreatedAt                   Categories");
+            todos.ForEach(todo => Console.WriteLine(todo));
+
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        }
+
+        public void ChangeStatus(List<Status> statuses)
+        {
+            Console.WriteLine("****Statuses*****");
+            statuses.ForEach(s => Console.WriteLine(s));
+            Console.WriteLine("*****************");
+
+            Console.WriteLine("Enter todo id and next status id:");
+            if(int.TryParse(Console.ReadLine(), out int todoId) &&
+                int.TryParse(Console.ReadLine(), out int statusId))
+            {
+                if(_todosRepository.GetById(todoId) != null
+                    || !statuses.Any(s => s.Id == statusId))
+                {
+                    _todosRepository.ChangeStatus(todoId, statusId);
+                    CustomConsole.Success("Todo status has been changed!");
+                }
+                else
+                {
+                    CustomConsole.Error($"Incorrect ids value");
+                }
+            }
+            else
+            {
+                CustomConsole.Error("Incorrect value!");
+            }
         }
 
         public void Remove()
         {
             Console.WriteLine("To do id to remove: ");
-            if(int.TryParse(Console.ReadLine(), out int id))
+            if(int.TryParse(Console.ReadLine(), out int id) &&
+                _todosRepository.GetById(id) != null)
             {
                 _todosRepository.Remove(id);
-                Console.WriteLine("To do has been removed!");
+                CustomConsole.Success("To do has been removed!");
             }
             else
             {
-                Console.WriteLine("Incorrect id!");  
+                CustomConsole.Error("Incorrect todo id!");  
             }
         }
     }
