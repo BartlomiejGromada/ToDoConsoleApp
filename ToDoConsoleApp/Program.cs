@@ -9,7 +9,7 @@ ToDoSeed.SeedData();
 var todosService = new ToDosService();
 var categoriesService = new CategoriesService();
 List<Category> categories = null;
-var statusesService = new StatusesService();
+var statusesService = new StatusesService()
 List<Status> statuses = null;
 
 var running = true;
