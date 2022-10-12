@@ -1,0 +1,34 @@
+on:
+  push:
+    branches: [master-pipeline]
+  pull_request:
+    branches: [master-pipeline]
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      #instalacja dotnet'a
+      - name: Setup .NET Core SDK 
+        uses: actions/setup-dotnet@v3.0.1
+        with: 
+          dotnet-version: 6.0.x
+      
+      #pobranie paczek nugetowych do naszego projektu
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      #budowanie projektu
+      - name: Build
+        run: dotnet build --no-restore
+        
+      #uruchomienie testów
+      - name: Test
+        run: dotnet test
+       
+       
+        
+    
