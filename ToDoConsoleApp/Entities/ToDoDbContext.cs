@@ -10,7 +10,7 @@ namespace ToDoConsoleApp.Entities
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly)
+           modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
 
         public DbSet<Status> Statuses { get; set; }
