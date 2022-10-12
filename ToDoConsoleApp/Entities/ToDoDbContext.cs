@@ -6,7 +6,7 @@ namespace ToDoConsoleApp.Entities
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "ToDo")
+            optionsBuilder.UseInMemoryDatabase(databaseName: "ToDo");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
